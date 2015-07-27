@@ -20,8 +20,9 @@ module Spree
         end
 
         def root_product_attrs
-          permalink = @params.delete(:permalink)
-          shipping_category_name = @params.delete(:shipping_category)
+          permalink = @params.delete(:permalink)          
+          @params[:shipping_category_id] = process_shipping_category(shipping_category_name)
+          @params[:shipping_category_id] = process_shipping_category("Shipping Required")
           process_taxons(@taxons_list)
           @root_options = @params.delete(:options)
           @properties = @params.delete(:properties)
