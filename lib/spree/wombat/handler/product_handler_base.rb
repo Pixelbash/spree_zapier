@@ -22,6 +22,7 @@ module Spree
         def root_product_attrs
           permalink = @params.delete(:permalink)
           shipping_category_name = @params.delete(:shipping_category)
+          shipping_category_name = "Default" if shipping_category_name.nil?
           process_taxons(@taxons_list)
           @root_options = @params.delete(:options)
           @properties = @params.delete(:properties)
