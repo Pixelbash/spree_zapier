@@ -4,12 +4,12 @@ Gem::Specification.new do |gem|
   gem.email         = ["peter@spreecommerce.com"]
   gem.summary       = "Webhooks and Push API implemention for Wombat"
   gem.description   = gem.summary
-  gem.homepage      = "http://wombat.co"
+  gem.homepage      = "http://zapier.co"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "spree_wombat"
+  gem.name          = "spree_zapier"
   gem.require_paths = ["lib"]
   gem.version       = '2.2.0'
 

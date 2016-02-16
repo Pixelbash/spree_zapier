@@ -2,13 +2,13 @@ module Spree
   module Wombat
     class Engine < Rails::Engine
       isolate_namespace Spree
-      engine_name 'spree_wombat'
+      engine_name 'spree_zapier'
 
       rake_tasks do
         load File.join(root, "tasks","push_it.rake")
       end
 
-      initializer "spree.wombat.environment", :before => :load_config_initializers do |app|
+      initializer "spree.zapier.environment", :before => :load_config_initializers do |app|
         Spree::Wombat::Config = Spree::WombatConfiguration.new
       end
 

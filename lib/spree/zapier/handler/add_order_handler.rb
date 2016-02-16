@@ -34,7 +34,7 @@ module Spree
           order.updater.update_shipment_total
           order.updater.update_payment_state
           order.updater.persist_totals
-          response "Order number #{order.number} was added", 200, Base.wombat_objects_for(order.reload)
+          response "Order number #{order.number} was added", 200, Base.zapier_objects_for(order.reload)
         end
 
         private

@@ -10,6 +10,6 @@ Spree::Wombat::Config.configure do |config|
   #   "Spree::Product" => { serializer: "Spree::Wombat::ProductSerializer", root: "products" },
   #   "Spree::StockItem" => { serializer: "Spree::Wombat::StockItemSerializer", root: "inventories" }
   # }
-  #config.push_url = "https://push.wombat.co"
+  #config.push_url = "https://push.zapier.co"
 
 end

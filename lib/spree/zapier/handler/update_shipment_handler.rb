@@ -123,7 +123,7 @@ module Spree
           # based on the shipping method.
           shipment.update_columns(cost: shipment_attributes[:cost]) if shipment_attributes[:cost].present?
 
-          return response("Updated shipment #{shipment_number}", 200, Base.wombat_objects_for(shipment))
+          return response("Updated shipment #{shipment_number}", 200, Base.zapier_objects_for(shipment))
         end
 
       end

@@ -3,8 +3,8 @@ SimpleCov.start do
   add_group 'Models', '/app/models/'
   add_group 'Controllers', '/app/controllers/'
   add_group 'Serializers', '/app/serializers/'
-  add_group "Wombat", '/lib/spree/wombat/'
-  add_group 'Handlers', '/lib/spree/wombat/handler/'
+  add_group "Wombat", '/lib/spree/zapier/'
+  add_group 'Handlers', '/lib/spree/zapier/handler/'
 
   add_filter '/spec/'
 

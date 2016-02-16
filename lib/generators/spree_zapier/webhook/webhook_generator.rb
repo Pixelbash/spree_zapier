@@ -21,7 +21,7 @@ module SpreeWombat
             }
           end
         end
-        template "webhook.rb.tt", "lib/spree/wombat/handler/#{webhook_handler_file}"
+        template "webhook.rb.tt", "lib/spree/zapier/handler/#{webhook_handler_file}"
       end
 
       private

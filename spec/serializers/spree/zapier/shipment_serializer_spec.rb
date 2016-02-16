@@ -33,8 +33,8 @@ module Spree
         end
 
         it "sets the channel to existing value other than spree" do
-          shipment.order.update_column :channel, 'wombat'
-          expect(serialized_shipment["channel"]).to eql "wombat"
+          shipment.order.update_column :channel, 'zapier'
+          expect(serialized_shipment["channel"]).to eql "zapier"
         end
       end
 

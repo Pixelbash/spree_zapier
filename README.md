@@ -2,24 +2,24 @@
 
 Connect your SpreeCommerce Storefront to Wombat, providing push API and webhook handlers
 
-[![Build Status](https://travis-ci.org/spree/spree_wombat.svg?branch=master)](https://travis-ci.org/spree/spree_wombat)
+[![Build Status](https://travis-ci.org/spree/spree_zapier.svg?branch=master)](https://travis-ci.org/spree/spree_zapier)
 
 ## Installation
 
-Add spree_wombat to your Gemfile:
+Add spree_zapier to your Gemfile:
 
 ```ruby
-gem 'spree_wombat', git: 'git@github.com:spree/spree_wombat.git', branch: 'master'
+gem 'spree_zapier', git: 'git@github.com:spree/spree_zapier.git', branch: 'master'
 ```
 
 Bundle your dependencies and run the installation generator:
 
 ```shell
 bundle
-bundle exec rails g spree_wombat:install
+bundle exec rails g spree_zapier:install
 ```
 
-Add your Wombat credentials to `config/initializers/wombat.rb`:
+Add your Wombat credentials to `config/initializers/zapier.rb`:
 
 ```ruby
 Spree::Wombat::Config.configure do |config|
@@ -30,7 +30,7 @@ end
 
 ## Configuration
 
-All the configuration is done inside the initializer here: `config/initializers/wombat.rb` all the default settings can be found there as well. Below we will explain all of them
+All the configuration is done inside the initializer here: `config/initializers/zapier.rb` all the default settings can be found there as well. Below we will explain all of them
 
 ### push_objects
 
@@ -58,7 +58,7 @@ The payload builder is a hash, the key is the model name we also use in the `pus
 
 Each model has a `serializer` and a `root` field that defines the serializer we use to serialize to JSON and the root defines the root node for that JSON.
 
-We have defined serializers for the default objects, you can find them [here](https://github.com/spree/spree_wombat/tree/2-3-stable/app/serializers/spree/wombat)
+We have defined serializers for the default objects, you can find them [here](https://github.com/spree/spree_zapier/tree/2-3-stable/app/serializers/spree/zapier)
 
 To push other objects to Wombat, you only need to add an entry in the `push_objects` and the `payload_builder` configurations.
 
@@ -67,7 +67,7 @@ To push other objects to Wombat, you only need to add an entry in the `push_obje
 
 For every model we push to Wombat we keep track when we pushed the objects.
 
-Do not add this in `config/initializers/wombat.rb` otherwise it will reset the data on each restart.
+Do not add this in `config/initializers/zapier.rb` otherwise it will reset the data on each restart.
 
 Instead, if you need to reset data or want to update a timestamp for an object you can do so in the console
 
@@ -87,7 +87,7 @@ property with an object that responds to `#call` and accepts the responder as an
 argument. e.g. with a proc:
 
 ```ruby
-# in config/initializers/wombat.rb:
+# in config/initializers/zapier.rb:
 Rails.application.config.to_prepare do
   Spree::Wombat::WebhookController.error_notifier = ->(responder) do
     Honeybadger.notify(responder.exception)
@@ -100,7 +100,7 @@ end
 To push objects to Wombat we provide you with the following rake task:
 
 ```shell
-bundle exec rake wombat:push_it
+bundle exec rake zapier:push_it
 ```
 
 This task will collect all the objects from `push_objects` that are not yet pushed (defined in `last_pushed_timestamps`) and will push those objects in batches of 10 to Wombat.
@@ -130,10 +130,10 @@ config.push_url = "http://mycustomurl"
 ## Create handler for a webhook
 
 ```shell
-bundle exec rails g spree_wombat:webhook my_webhook
+bundle exec rails g spree_zapier:webhook my_webhook
 ```
 
-this will generate a handler class for the `my_webhook` webhook in `lib/spree/wombat/handler/my_webhook_handler.rb`
+this will generate a handler class for the `my_webhook` webhook in `lib/spree/zapier/handler/my_webhook_handler.rb`
 
 ```ruby
 module Spree
@@ -158,12 +158,12 @@ end
 ## Create custom serializers
 
 ```shell
-bundle exec rails g spree_wombat:serializer Spree::Order MyOrderSerializer
+bundle exec rails g spree_zapier:serializer Spree::Order MyOrderSerializer
 ```
 
 This will generate a serializer for the provided model name, when the model is already configured in the `payload_builder` we use that serializer name as super class to inherit from. With active_model_serializer you also inherit the attributes so you can keep the existing configuration and only change that what's needed.
 
-The generator will also automatically set the correct configuration in `config/initializers/wombat.rb`
+The generator will also automatically set the correct configuration in `config/initializers/zapier.rb`
 
 ## Testing
 
