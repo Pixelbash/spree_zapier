@@ -43,17 +43,17 @@ module Spree
 
       def self.push(json_payload)
         res = HTTParty.post(
-                Spree::Zapier::Config[:push_url],
-                {
-                  body: json_payload,
-                  headers: {
-                   'Content-Type'       => 'application/json',
-                   'X-Hub-Store'        => Spree::Zapier::Config[:connection_id],
-                   'X-Hub-Access-Token' => Spree::Zapier::Config[:connection_token],
-                   'X-Hub-Timestamp'    => Time.now.utc.to_i.to_s
-                  }
-                }
-              )
+          Spree::Zapier::Config[:push_url],
+          {
+            body: json_payload,
+            headers: {
+             'Content-Type'       => 'application/json',
+             'X-Hub-Store'        => Spree::Zapier::Config[:connection_id],
+             'X-Hub-Access-Token' => Spree::Zapier::Config[:connection_token],
+             'X-Hub-Timestamp'    => Time.now.utc.to_i.to_s
+            }
+          }
+        )
 
         validate(res)
       end
@@ -66,7 +66,7 @@ module Spree
       end
 
       def self.validate(res)
-        raise PushApiError, "Push not successful. Zapier returned response code #{res.code} and message: #{res.body}" if res.code != 202
+        raise PushApiError, "Push not successful. Zapier returned response code #{res.code} and message: #{res.body}" if res.code != 200
       end
     end
   end
