@@ -5,7 +5,7 @@ module Spree
       engine_name 'spree_zapier'
 
       rake_tasks do
-        load File.join(root, "tasks","push_it.rake")
+        load File.join(root, "tasks","push.rake")
       end
 
       initializer "spree.zapier.environment", :before => :load_config_initializers do |app|

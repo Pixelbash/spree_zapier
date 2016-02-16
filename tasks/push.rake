@@ -16,8 +16,8 @@ namespace :zapier do
     end
   end
 
-  desc 'Set push date to date/time (default is now). Usage: zapier:last_pushed date=16/12/2016'
-  task :last_pushed, : => :environment do |t, args|
+  desc 'Set push date to date/time (defaults to now). Usage: rake zapier:last_pushed date=09/02/2016'
+  task :last_pushed => :environment do |t, args|
     # Get time, from args if necessary
     time = Time.now
     if ENV['date'].present?
