@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe OrderSerializer do
 
       let!(:order) { create(:shipped_order) }
@@ -92,7 +92,7 @@ module Spree
           before { order.promotions << promotion }
 
           it "includes promotions" do
-            promo_json = Spree::Wombat::PromotionSerializer.new(promotion, root: false).as_json.stringify_keys
+            promo_json = Spree::Zapier::PromotionSerializer.new(promotion, root: false).as_json.stringify_keys
             expect(serialized_order['promotions']).to eq [promo_json]
           end
         end

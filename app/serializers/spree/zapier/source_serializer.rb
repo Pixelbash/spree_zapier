@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class SourceSerializer < ActiveModel::Serializer
       # attributes :name, :cc_type, :last_digits, :source_type
 

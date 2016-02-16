@@ -1,12 +1,12 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class CustomerReturnSerializer < ActiveModel::Serializer
       attributes :id, :fully_reimbursed, :stock_location, :channel, :resolution_path
 
-      has_many :return_items, serializer: Spree::Wombat::ReturnItemSerializer
-      has_many :reimbursements, serializer: Spree::Wombat::ReimbursementSerializer
+      has_many :return_items, serializer: Spree::Zapier::ReturnItemSerializer
+      has_many :reimbursements, serializer: Spree::Zapier::ReimbursementSerializer
 
       def id
         object.number

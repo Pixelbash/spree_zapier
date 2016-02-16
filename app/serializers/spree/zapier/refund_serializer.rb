@@ -1,10 +1,10 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class RefundSerializer < ActiveModel::Serializer
       attributes :reason, :amount, :description
-      has_one :payment, serializer: Spree::Wombat::PaymentSerializer
+      has_one :payment, serializer: Spree::Zapier::PaymentSerializer
 
       def reason
         object.reason.try(:name)

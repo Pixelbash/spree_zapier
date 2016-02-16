@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
 
     describe Handler::Base do
 
@@ -34,7 +34,7 @@ module Spree
 
         context "for the called webhook" do
           it "will return the webhook handler" do
-            expect(Handler::Base.build_handler("add_order", ::Hub::Samples::Order.request.to_json).class.name).to eql "Spree::Wombat::Handler::AddOrderHandler"
+            expect(Handler::Base.build_handler("add_order", ::Hub::Samples::Order.request.to_json).class.name).to eql "Spree::Zapier::Handler::AddOrderHandler"
           end
         end
       end

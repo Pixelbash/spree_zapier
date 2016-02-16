@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe StockItemSerializer do
 
       let!(:variant) { create(:variant) }

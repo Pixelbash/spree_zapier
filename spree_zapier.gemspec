@@ -2,7 +2,7 @@
 Gem::Specification.new do |gem|
   gem.authors       = ["Peter Berkenbosch"]
   gem.email         = ["peter@spreecommerce.com"]
-  gem.summary       = "Webhooks and Push API implemention for Wombat"
+  gem.summary       = "Webhooks and Push API implemention for Zapier"
   gem.description   = gem.summary
   gem.homepage      = "http://zapier.co"
 

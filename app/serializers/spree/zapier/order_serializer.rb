@@ -1,18 +1,18 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class OrderSerializer < ActiveModel::Serializer
 
       attributes :id, :status, :channel, :email, :currency, :placed_on, :updated_at, :totals,
         :adjustments, :guest_token, :shipping_instructions
 
-      has_many :line_items,  serializer: Spree::Wombat::LineItemSerializer
-      has_many :payments, serializer: Spree::Wombat::PaymentSerializer
-      has_many :promotions, serializer: Spree::Wombat::PromotionSerializer
+      has_many :line_items,  serializer: Spree::Zapier::LineItemSerializer
+      has_many :payments, serializer: Spree::Zapier::PaymentSerializer
+      has_many :promotions, serializer: Spree::Zapier::PromotionSerializer
 
-      has_one :shipping_address, serializer: Spree::Wombat::AddressSerializer
-      has_one :billing_address, serializer: Spree::Wombat::AddressSerializer
+      has_one :shipping_address, serializer: Spree::Zapier::AddressSerializer
+      has_one :billing_address, serializer: Spree::Zapier::AddressSerializer
 
       def id
         object.number

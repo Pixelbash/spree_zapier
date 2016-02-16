@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe InventoryUnitSerializer do
 
       let(:shipment) { create(:shipment, address: create(:address), order: create(:order_with_line_items)) }

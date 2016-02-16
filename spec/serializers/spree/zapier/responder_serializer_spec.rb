@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe ResponderSerializer do
 
       let(:responder) {Responder.new("12355","Order abc124 was added")}

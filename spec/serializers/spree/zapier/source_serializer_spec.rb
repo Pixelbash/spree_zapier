@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe SourceSerializer do
 
       context 'when Check' do

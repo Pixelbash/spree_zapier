@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::SetPriceHandler do
       let(:message) {::Hub::Samples::Price.request}
       let(:handler) { Handler::SetPriceHandler.new(message.to_json) }

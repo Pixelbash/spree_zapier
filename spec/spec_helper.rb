@@ -3,12 +3,12 @@ SimpleCov.start do
   add_group 'Models', '/app/models/'
   add_group 'Controllers', '/app/controllers/'
   add_group 'Serializers', '/app/serializers/'
-  add_group "Wombat", '/lib/spree/zapier/'
+  add_group "Zapier", '/lib/spree/zapier/'
   add_group 'Handlers', '/lib/spree/zapier/handler/'
 
   add_filter '/spec/'
 
-  project_name 'Webhooks and Push API implemention for Wombat'
+  project_name 'Webhooks and Push API implemention for Zapier'
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -56,7 +56,7 @@ RSpec.configure do |config|
 
   config.before do
     HTTParty.stub :post
-    Spree::Wombat::Config[:connection_token] = "abc1233"
+    Spree::Zapier::Config[:connection_token] = "abc1233"
 
     DatabaseCleaner.start
   end
@@ -71,7 +71,7 @@ RSpec.configure do |config|
   end
 end
 
-class Spree::Wombat::Handler::MyCustomHandler < Spree::Wombat::Handler::Base
+class Spree::Zapier::Handler::MyCustomHandler < Spree::Zapier::Handler::Base
   def process
     response "Order added!"
   end

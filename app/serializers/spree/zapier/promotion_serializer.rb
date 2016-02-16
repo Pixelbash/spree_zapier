@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class PromotionSerializer < ActiveModel::Serializer
       attributes :name, :code, :category_name, :category_code
 

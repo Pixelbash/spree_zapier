@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class AdjustmentSerializer < ActiveModel::Serializer
       attributes :name, :value
 

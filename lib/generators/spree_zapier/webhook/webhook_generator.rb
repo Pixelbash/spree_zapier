@@ -1,4 +1,4 @@
-module SpreeWombat
+module SpreeZapier
   module Generators
     class WebhookGenerator < Rails::Generators::Base
 

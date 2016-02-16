@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class ProductSerializer < ActiveModel::Serializer
 
       attributes :id, :name, :sku, :description, :price, :cost_price,
@@ -9,7 +9,7 @@ module Spree
                  :shipping_category, :taxons, :options, :weight, :height, :width,
                  :depth, :variants
 
-      has_many :images, serializer: Spree::Wombat::ImageSerializer
+      has_many :images, serializer: Spree::Zapier::ImageSerializer
 
       def id
         object.sku
@@ -45,11 +45,11 @@ module Spree
 
       def variants
         if object.variants.empty?
-          [Spree::Wombat::VariantSerializer.new(object.master, root:false)]
+          [Spree::Zapier::VariantSerializer.new(object.master, root:false)]
         else
           ActiveModel::ArraySerializer.new(
             object.variants,
-            each_serializer: Spree::Wombat::VariantSerializer,
+            each_serializer: Spree::Zapier::VariantSerializer,
             root: false
           )
         end

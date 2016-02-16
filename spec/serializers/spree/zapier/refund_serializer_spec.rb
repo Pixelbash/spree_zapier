@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe RefundSerializer do
       let(:refund) { build(:refund) }
       let(:serialized_refund) { JSON.parse(RefundSerializer.new(refund, root: false).to_json, symbolize_names: true) }

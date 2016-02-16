@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::AddProductHandler do
 
       let(:message) { ::Hub::Samples::Product.request }
@@ -281,7 +281,7 @@ module Spree
 
           it "returns the correct response" do
             responder = handler.process
-            expect(responder.class.name).to eql "Spree::Wombat::Responder"
+            expect(responder.class.name).to eql "Spree::Zapier::Responder"
             expect(responder.request_id).to eql message["request_id"]
             expect(responder.summary).to match "Product #{message["product"]["id"]} added"
           end
@@ -337,7 +337,7 @@ module Spree
 
           it "returns the correct response" do
             responder = handler.process
-            expect(responder.class.name).to eql "Spree::Wombat::Responder"
+            expect(responder.class.name).to eql "Spree::Zapier::Responder"
             expect(responder.request_id).to eql message["request_id"]
             expect(responder.summary).to eql "Product #{message["product"]["id"]} added, with child skus: #{product.variants.pluck(:sku)}"
           end

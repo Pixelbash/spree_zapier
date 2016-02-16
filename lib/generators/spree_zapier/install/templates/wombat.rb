@@ -1,4 +1,4 @@
-Spree::Wombat::Config.configure do |config|
+Spree::Zapier::Config.configure do |config|
 
   config.connection_token = "YOUR TOKEN"
   config.connection_id = "YOUR CONNECTION ID"
@@ -6,9 +6,9 @@ Spree::Wombat::Config.configure do |config|
   # config.push_objects = ["Spree::Order", "Spree::Product"]
   # config.payload_builder = {
   #   # By default we filter orders to only push if they are completed.  You can remove the filter to send incomplete orders as well.
-  #   "Spree::Order" => { serializer: "Spree::Wombat::OrderSerializer", root: "orders", filter: "complete" },
-  #   "Spree::Product" => { serializer: "Spree::Wombat::ProductSerializer", root: "products" },
-  #   "Spree::StockItem" => { serializer: "Spree::Wombat::StockItemSerializer", root: "inventories" }
+  #   "Spree::Order" => { serializer: "Spree::Zapier::OrderSerializer", root: "orders", filter: "complete" },
+  #   "Spree::Product" => { serializer: "Spree::Zapier::ProductSerializer", root: "products" },
+  #   "Spree::StockItem" => { serializer: "Spree::Zapier::StockItemSerializer", root: "inventories" }
   # }
   #config.push_url = "https://push.zapier.co"
 

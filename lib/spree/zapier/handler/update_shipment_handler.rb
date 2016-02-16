@@ -1,5 +1,5 @@
 module Spree
-  module Wombat
+  module Zapier
     module Handler
       class UpdateShipmentHandler < Base
 

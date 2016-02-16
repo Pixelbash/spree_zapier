@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Responder do
 
       describe '#initialize' do

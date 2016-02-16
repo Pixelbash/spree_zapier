@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe ProductSerializer do
 
       let(:product) { create(:product, height: 1, width: 1, depth: 1) }

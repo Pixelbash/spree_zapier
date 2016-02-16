@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class ResponderSerializer < ActiveModel::Serializer
       attributes :request_id, :summary, :backtrace, :objects
 

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe VariantSerializer do
 
       let(:variant) { create(:variant) }

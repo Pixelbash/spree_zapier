@@ -1,11 +1,11 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class PaymentSerializer < ActiveModel::Serializer
       attributes :id, :number, :status, :amount, :payment_method
 
-      has_one :source, serializer: Spree::Wombat::SourceSerializer
+      has_one :source, serializer: Spree::Zapier::SourceSerializer
 
       def payment_method
         object.payment_method.name

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::UpdateOrderHandler do
 
       context "#process" do
@@ -29,7 +29,7 @@ module Spree
 
         context "with no order present" do
 
-          it "returns a Wombat::Responder with 500 status" do
+          it "returns a Zapier::Responder with 500 status" do
             responder = handler.process
             expect(responder.summary).to match /Order with number R.{9} was not found/
             expect(responder.code).to eql 500

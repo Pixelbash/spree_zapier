@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe ReturnItemSerializer do
       let(:return_item) { build(:return_item) }
       let(:serialized_return_item) { JSON.parse(ReturnItemSerializer.new(return_item, root: false).to_json, symbolize_names: true) }

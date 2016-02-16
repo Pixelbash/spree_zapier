@@ -1,11 +1,11 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class VariantSerializer < ActiveModel::Serializer
 
       attributes :sku, :price, :cost_price, :options, :weight, :height, :width, :depth
-      has_many :images, serializer: Spree::Wombat::ImageSerializer
+      has_many :images, serializer: Spree::Zapier::ImageSerializer
 
       def price
         object.price.to_f

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe ShipmentSerializer do
 
       let(:shipment) { create(:shipment, address: create(:address), order: create(:order_with_line_items)) }
@@ -83,7 +83,7 @@ module Spree
         line_items = JSON.parse(
           ActiveModel::ArraySerializer.new(
             shipment.inventory_units,
-            each_serializer: Spree::Wombat::InventoryUnitSerializer,
+            each_serializer: Spree::Zapier::InventoryUnitSerializer,
             root: false
           ).to_json
         )

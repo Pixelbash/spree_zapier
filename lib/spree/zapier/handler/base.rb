@@ -1,7 +1,7 @@
 require 'json'
 
 module Spree
-  module Wombat
+  module Zapier
     module Handler
       class Base
 
@@ -21,12 +21,12 @@ module Spree
         end
 
         def self.build_handler(path, message)
-          klass = ("Spree::Wombat::Handler::" + path.camelize + "Handler").constantize
+          klass = ("Spree::Zapier::Handler::" + path.camelize + "Handler").constantize
           klass.new(message)
         end
 
         def response(message, code = 200, objects = nil, exception = nil)
-          Spree::Wombat::Responder.new(@request_id, message, code, objects, exception)
+          Spree::Zapier::Responder.new(@request_id, message, code, objects, exception)
         end
 
         def self.zapier_objects_for(object)
@@ -35,20 +35,20 @@ module Spree
           class_name = object.class.name
           case class_name
             when "Spree::Order"
-              if Spree::Wombat::Config[:payload_builder]["Spree::Order"]
-                payload_builder = Spree::Wombat::Config[:payload_builder]["Spree::Order"]
+              if Spree::Zapier::Config[:payload_builder]["Spree::Order"]
+                payload_builder = Spree::Zapier::Config[:payload_builder]["Spree::Order"]
                 zapier_objects_hash[payload_builder[:root]] = generate_order_payload(object.reload)
-                if Spree::Wombat::Config[:push_objects].include? "Spree::Shipment"
-                  payload_builder = Spree::Wombat::Config[:payload_builder]["Spree::Shipment"]
+                if Spree::Zapier::Config[:push_objects].include? "Spree::Shipment"
+                  payload_builder = Spree::Zapier::Config[:payload_builder]["Spree::Shipment"]
                   zapier_objects_hash[payload_builder[:root]] = generate_shipments_payload(object.reload.shipments)
                 end
               end
             when "Spree::Shipment"
-              if Spree::Wombat::Config[:payload_builder]["Spree::Shipment"]
-                payload_builder = Spree::Wombat::Config[:payload_builder]["Spree::Shipment"]
+              if Spree::Zapier::Config[:payload_builder]["Spree::Shipment"]
+                payload_builder = Spree::Zapier::Config[:payload_builder]["Spree::Shipment"]
                 zapier_objects_hash[payload_builder[:root]] = generate_shipments_payload(object.order.reload.shipments)
-                if Spree::Wombat::Config[:push_objects].include? "Spree::Order"
-                  payload_builder = Spree::Wombat::Config[:payload_builder]["Spree::Order"]
+                if Spree::Zapier::Config[:push_objects].include? "Spree::Order"
+                  payload_builder = Spree::Zapier::Config[:payload_builder]["Spree::Order"]
                   zapier_objects_hash[payload_builder[:root]] = generate_order_payload(object.order.reload)
                 end
               end
@@ -63,7 +63,7 @@ module Spree
         private
 
         def self.generate_shipments_payload(shipments)
-          payload_builder = Spree::Wombat::Config[:payload_builder]["Spree::Shipment"]
+          payload_builder = Spree::Zapier::Config[:payload_builder]["Spree::Shipment"]
           shipments_payload = []
           shipments.each do |shipment|
             shipments_payload << JSON.parse(payload_builder[:serializer].constantize.new(shipment, root: false).to_json)
@@ -72,7 +72,7 @@ module Spree
         end
 
         def self.generate_order_payload(order)
-          payload_builder = Spree::Wombat::Config[:payload_builder]["Spree::Order"]
+          payload_builder = Spree::Zapier::Config[:payload_builder]["Spree::Order"]
           order_payload = []
           order_payload << JSON.parse(payload_builder[:serializer].constantize.new(order, root: false).to_json)
         end

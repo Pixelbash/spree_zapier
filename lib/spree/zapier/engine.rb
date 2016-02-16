@@ -1,5 +1,5 @@
 module Spree
-  module Wombat
+  module Zapier
     class Engine < Rails::Engine
       isolate_namespace Spree
       engine_name 'spree_zapier'
@@ -9,7 +9,7 @@ module Spree
       end
 
       initializer "spree.zapier.environment", :before => :load_config_initializers do |app|
-        Spree::Wombat::Config = Spree::WombatConfiguration.new
+        Spree::Zapier::Config = Spree::ZapierConfiguration.new
       end
 
       def self.activate

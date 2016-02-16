@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::AddOrderHandler do
       let!(:country) { create(:country) }
       let!(:state) { country.states.first || create(:state, :country => country) }
@@ -118,7 +118,7 @@ module Spree
 
           it "returns a Hub::Responder" do
             responder = handler.process
-            expect(responder.class.name).to eql "Spree::Wombat::Responder"
+            expect(responder.class.name).to eql "Spree::Zapier::Responder"
             expect(responder.request_id).to eql message["request_id"]
             expect(responder.summary).to match /Order number schoftech_1018 was added/
           end

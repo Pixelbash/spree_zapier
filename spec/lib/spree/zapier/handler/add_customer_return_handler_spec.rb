@@ -82,7 +82,7 @@ shared_examples "does not attempt to refund the customer" do
 end
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::AddCustomerReturnHandler do
 
       context "#process" do
@@ -131,7 +131,7 @@ module Spree
           end
 
           it "returns a Hub::Responder" do
-            expect(responder.class.name).to eql "Spree::Wombat::Responder"
+            expect(responder.class.name).to eql "Spree::Zapier::Responder"
           end
 
           it "has the correct request_id" do
@@ -308,7 +308,7 @@ module Spree
           let(:message) { { a: 1 } }
 
           it "returns a Hub::Responder" do
-            expect(responder.class.name).to eql "Spree::Wombat::Responder"
+            expect(responder.class.name).to eql "Spree::Zapier::Responder"
           end
 
           it "has the correct request_id" do

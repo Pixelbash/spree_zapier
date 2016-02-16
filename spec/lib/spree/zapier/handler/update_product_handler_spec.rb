@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::UpdateProductHandler do
       before do
         img_fixture = File.open(File.expand_path('../../../../../fixtures/thinking-cat.jpg', __FILE__))
@@ -136,7 +136,7 @@ module Spree
           let(:responder) { handler.process }
 
           it "is a Hub::Responder" do
-            expect(responder.class.name).to eql "Spree::Wombat::Responder"
+            expect(responder.class.name).to eql "Spree::Zapier::Responder"
           end
 
           it "returns the original request_id" do

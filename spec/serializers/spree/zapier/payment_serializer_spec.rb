@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe PaymentSerializer do
       let(:payment) do
         Spree::Payment.new do |p|

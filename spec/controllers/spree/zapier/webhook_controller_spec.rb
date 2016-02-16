@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  describe Wombat::WebhookController do
+  describe Zapier::WebhookController do
 
     let!(:message) {
       ::Hub::Samples::Order.request
@@ -40,13 +40,13 @@ module Spree
             web_request
             expect(response.code).to eql "500"
             json = JSON.parse(response.body)
-            expect(json["summary"]).to eql "uninitialized constant Spree::Wombat::Handler::UpblateOrderHandler"
+            expect(json["summary"]).to eql "uninitialized constant Spree::Zapier::Handler::UpblateOrderHandler"
             expect(json["backtrace"]).to be_present
           end
 
           context 'with an error_notifier' do
-            before { Spree::Wombat::WebhookController.error_notifier = error_notifier }
-            after { Spree::Wombat::WebhookController.error_notifier = nil }
+            before { Spree::Zapier::WebhookController.error_notifier = error_notifier }
+            after { Spree::Zapier::WebhookController.error_notifier = nil }
             let(:error_notifier) { -> (_responder) {} }
 
             it 'calls the error_notifier' do

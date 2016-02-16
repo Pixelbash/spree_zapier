@@ -20,7 +20,7 @@ shared_examples "updates inventory level and responds with proper message" do
 end
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::SetInventoryHandler do
       let(:message) {::Hub::Samples::Inventory.request}
       let(:handler) { Handler::SetInventoryHandler.new(message.to_json) }

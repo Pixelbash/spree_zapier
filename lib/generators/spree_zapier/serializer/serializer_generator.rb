@@ -1,4 +1,4 @@
-module SpreeWombat
+module SpreeZapier
   module Generators
     class SerializerGenerator < Rails::Generators::Base
 
@@ -10,7 +10,7 @@ module SpreeWombat
       attr_accessor :superclass
 
       def generate
-        payload_builder = Spree::Wombat::Config[:payload_builder]
+        payload_builder = Spree::Zapier::Config[:payload_builder]
         root_sample = model_name.demodulize.underscore.pluralize.downcase
 
         if payload_builder.keys.include?(model_name)
@@ -23,9 +23,9 @@ module SpreeWombat
         #payload_builder[model_name] = { :serializer => serializer_name, :root => root_sample}
 
         append_file 'config/initializers/zapier.rb', %Q{
-payload_builder = Spree::Wombat::Config[:payload_builder]
+payload_builder = Spree::Zapier::Config[:payload_builder]
 payload_builder["#{model_name}"] = { :serializer => "#{serializer_name}", :root => "#{root_sample}" }
-Spree::Wombat::Config[:payload_builder] = payload_builder
+Spree::Zapier::Config[:payload_builder] = payload_builder
         }
       end
     end

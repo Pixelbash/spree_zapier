@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe Handler::UpdateShipmentHandler do
       let(:message) {::Hub::Samples::Shipment.request}
       let(:handler) { Handler::UpdateShipmentHandler.new(message.to_json) }

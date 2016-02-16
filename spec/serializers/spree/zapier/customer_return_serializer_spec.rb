@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe CustomerReturnSerializer do
       let(:customer_return) { create(:customer_return) }
       let(:serialized_return) { JSON.parse(CustomerReturnSerializer.new(customer_return, root: false).to_json, symbolize_names: true) }

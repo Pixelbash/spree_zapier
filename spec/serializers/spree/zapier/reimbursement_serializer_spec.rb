@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe ReimbursementSerializer do
       let(:reimbursement) { create(:reimbursement) }
       let(:serialized_reimbursement) { JSON.parse(ReimbursementSerializer.new(reimbursement, root: false).to_json, symbolize_names: true) }

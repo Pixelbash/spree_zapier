@@ -1,7 +1,7 @@
 require "active_model/serializer_support"
 
 module Spree
-  module Wombat
+  module Zapier
     class Responder
       class ErroredResponse < StandardError; end
 

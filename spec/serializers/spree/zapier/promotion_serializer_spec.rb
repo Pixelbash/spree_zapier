@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spree
-  module Wombat
+  module Zapier
     describe PromotionSerializer, type: :serializer do
       let(:promotion) { Spree::Promotion.new(name: "Promo", code: "pro") }
       let(:serialized) { JSON.parse(PromotionSerializer.new(promotion, root: false).to_json) }

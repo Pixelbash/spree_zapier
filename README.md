@@ -1,6 +1,6 @@
-# Spree Wombat
+# Spree Zapier
 
-Connect your SpreeCommerce Storefront to Wombat, providing push API and webhook handlers
+Connect your SpreeCommerce Storefront to Zapier, providing push API and webhook handlers
 
 [![Build Status](https://travis-ci.org/spree/spree_zapier.svg?branch=master)](https://travis-ci.org/spree/spree_zapier)
 
@@ -19,10 +19,10 @@ bundle
 bundle exec rails g spree_zapier:install
 ```
 
-Add your Wombat credentials to `config/initializers/zapier.rb`:
+Add your Zapier credentials to `config/initializers/zapier.rb`:
 
 ```ruby
-Spree::Wombat::Config.configure do |config|
+Spree::Zapier::Config.configure do |config|
   config.connection_token = "YOUR TOKEN"
   config.connection_id = "YOUR CONNECTION ID"
 end
@@ -34,7 +34,7 @@ All the configuration is done inside the initializer here: `config/initializers/
 
 ### push_objects
 
-The push_objects is an array of model names that are selected to push to Wombat. We use these as keys in other places as well to configure how the payload is serialized and to keep track of the last time we pushed the objects.
+The push_objects is an array of model names that are selected to push to Zapier. We use these as keys in other places as well to configure how the payload is serialized and to keep track of the last time we pushed the objects.
 
 ```ruby
 config.push_objects = ["Spree::Order", "Spree::Product"]
@@ -44,13 +44,13 @@ By default we only push `Spree::Order` and `Spree::Product` models.
 
 ### payload_builder
 
-To push the data to Wombat we need to configure the way on how to construct the JSON payload.
+To push the data to Zapier we need to configure the way on how to construct the JSON payload.
 
 
 ```ruby
 config.payload_builder = {
-  "Spree::Order"  => {:serializer => "Spree::Wombat::OrderSerializer", :root => "orders"},
-  "Spree::Product" => {:serializer => "Spree::Wombat::ProductSerializer", :root => "products"},
+  "Spree::Order"  => {:serializer => "Spree::Zapier::OrderSerializer", :root => "orders"},
+  "Spree::Product" => {:serializer => "Spree::Zapier::ProductSerializer", :root => "products"},
 }
 
 ```
@@ -60,21 +60,21 @@ Each model has a `serializer` and a `root` field that defines the serializer we 
 
 We have defined serializers for the default objects, you can find them [here](https://github.com/spree/spree_zapier/tree/2-3-stable/app/serializers/spree/zapier)
 
-To push other objects to Wombat, you only need to add an entry in the `push_objects` and the `payload_builder` configurations.
+To push other objects to Zapier, you only need to add an entry in the `push_objects` and the `payload_builder` configurations.
 
 
 ### last_pushed_timestamps
 
-For every model we push to Wombat we keep track when we pushed the objects.
+For every model we push to Zapier we keep track when we pushed the objects.
 
 Do not add this in `config/initializers/zapier.rb` otherwise it will reset the data on each restart.
 
 Instead, if you need to reset data or want to update a timestamp for an object you can do so in the console
 
 ```shell
-timestamps = Spree::Wombat::Config[:last_pushed_timestamps]
+timestamps = Spree::Zapier::Config[:last_pushed_timestamps]
 timestamps["Spree::Order"] = 2.days.ago
-Spree::Wombat::Config[:last_pushed_timestamps] = timestamps
+Spree::Zapier::Config[:last_pushed_timestamps] = timestamps
 ```
 
 This will update the preference in the database and will use your updated timestamp for, in this case, 'Spree::Order'
@@ -89,34 +89,34 @@ argument. e.g. with a proc:
 ```ruby
 # in config/initializers/zapier.rb:
 Rails.application.config.to_prepare do
-  Spree::Wombat::WebhookController.error_notifier = ->(responder) do
+  Spree::Zapier::WebhookController.error_notifier = ->(responder) do
     Honeybadger.notify(responder.exception)
   end
 end
 ```
 
-## Push to Wombat
+## Push to Zapier
 
-To push objects to Wombat we provide you with the following rake task:
+To push objects to Zapier we provide you with the following rake task:
 
 ```shell
 bundle exec rake zapier:push_it
 ```
 
-This task will collect all the objects from `push_objects` that are not yet pushed (defined in `last_pushed_timestamps`) and will push those objects in batches of 10 to Wombat.
+This task will collect all the objects from `push_objects` that are not yet pushed (defined in `last_pushed_timestamps`) and will push those objects in batches of 10 to Zapier.
 
 You could also add a background task to make that happen, all you need there are these lines:
 
 ```ruby
-Spree::Wombat::Config[:push_objects].each do |object|
-  Spree::Wombat::Client.push_batches(object)
+Spree::Zapier::Config[:push_objects].each do |object|
+  Spree::Zapier::Client.push_batches(object)
 end
 ```
 
 If you want to push Spree::Orders manually for example, you can call this:
 
 ```ruby
-Spree::Wombat::Client.push_batches("Spree::Order")
+Spree::Zapier::Client.push_batches("Spree::Order")
 ```
 
 ### push_url
@@ -137,7 +137,7 @@ this will generate a handler class for the `my_webhook` webhook in `lib/spree/za
 
 ```ruby
 module Spree
-  module Wombat
+  module Zapier
     module Handler
       class MyWebhookHandler < Base
 

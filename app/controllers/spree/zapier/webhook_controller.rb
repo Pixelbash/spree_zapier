@@ -1,5 +1,5 @@
 module Spree
-  module Wombat
+  module Zapier
     class WebhookController < ActionController::Base
       # Applications can use error_notifier to forward errors to tools like
       # airbrake, honeybadger, rollbar, etc.
@@ -18,7 +18,7 @@ module Spree
 
       protected
       def authorize
-        unless request.headers['HTTP_X_HUB_TOKEN'] == Spree::Wombat::Config[:connection_token]
+        unless request.headers['HTTP_X_HUB_TOKEN'] == Spree::Zapier::Config[:connection_token]
           base_handler = Handler::Base.new(@webhook_body)
           responder = base_handler.response('Unauthorized!', 401)
           render_responder(responder)

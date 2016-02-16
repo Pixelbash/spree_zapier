@@ -4,16 +4,16 @@ require 'httparty'
 require 'active_model/array_serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class Client
 
       def self.push_batches(object, ts_offset = 5)
         object_count = 0
 
-        last_push_time = Spree::Wombat::Config[:last_pushed_timestamps][object] || Time.at(0)
+        last_push_time = Spree::Zapier::Config[:last_pushed_timestamps][object] || Time.at(0)
         this_push_time = Time.now
 
-        payload_builder = Spree::Wombat::Config[:payload_builder][object]
+        payload_builder = Spree::Zapier::Config[:payload_builder][object]
 
         model_name = payload_builder[:model].present? ? payload_builder[:model] : object
 
@@ -26,7 +26,7 @@ module Spree
         # go 'ts_offset' seconds back in time to catch missing objects
         last_push_time = last_push_time - ts_offset.seconds
 
-        scope.where(updated_at: last_push_time...this_push_time).find_in_batches(batch_size: Spree::Wombat::Config[:batch_size]) do |batch|
+        scope.where(updated_at: last_push_time...this_push_time).find_in_batches(batch_size: Spree::Zapier::Config[:batch_size]) do |batch|
           object_count += batch.size
           payload = ActiveModel::ArraySerializer.new(
             batch,
@@ -43,13 +43,13 @@ module Spree
 
       def self.push(json_payload)
         res = HTTParty.post(
-                Spree::Wombat::Config[:push_url],
+                Spree::Zapier::Config[:push_url],
                 {
                   body: json_payload,
                   headers: {
                    'Content-Type'       => 'application/json',
-                   'X-Hub-Store'        => Spree::Wombat::Config[:connection_id],
-                   'X-Hub-Access-Token' => Spree::Wombat::Config[:connection_token],
+                   'X-Hub-Store'        => Spree::Zapier::Config[:connection_id],
+                   'X-Hub-Access-Token' => Spree::Zapier::Config[:connection_token],
                    'X-Hub-Timestamp'    => Time.now.utc.to_i.to_s
                   }
                 }
@@ -60,13 +60,13 @@ module Spree
 
       private
       def self.update_last_pushed(object, new_last_pushed)
-        last_pushed_ts = Spree::Wombat::Config[:last_pushed_timestamps]
+        last_pushed_ts = Spree::Zapier::Config[:last_pushed_timestamps]
         last_pushed_ts[object] = new_last_pushed
-        Spree::Wombat::Config[:last_pushed_timestamps] = last_pushed_ts
+        Spree::Zapier::Config[:last_pushed_timestamps] = last_pushed_ts
       end
 
       def self.validate(res)
-        raise PushApiError, "Push not successful. Wombat returned response code #{res.code} and message: #{res.body}" if res.code != 202
+        raise PushApiError, "Push not successful. Zapier returned response code #{res.code} and message: #{res.body}" if res.code != 202
       end
     end
   end

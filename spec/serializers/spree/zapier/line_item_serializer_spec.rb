@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Spree
-  module Wombat
+  module Zapier
     describe LineItemSerializer do
 
       let(:line_item) { create(:line_item) }

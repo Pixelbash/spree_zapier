@@ -1,7 +1,7 @@
 require 'open-uri'
 
 module Spree
-  module Wombat
+  module Zapier
     module Handler
       class UpdateProductHandler < ProductHandlerBase
 

@@ -1,5 +1,5 @@
 module Spree
-  module Wombat
+  module Zapier
     module Handler
       class <%=handler_class%> <%= "< Base" unless existing_handler %>
 

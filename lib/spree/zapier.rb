@@ -1,7 +1,7 @@
 require 'spree/core'
 
 module Spree
-  module Wombat
+  module Zapier
   end
 end
 

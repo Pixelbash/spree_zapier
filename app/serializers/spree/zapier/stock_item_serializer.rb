@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     # Accepts a Spree::StockItem and serializes this to the Hub Inventory format
     class StockItemSerializer < ActiveModel::Serializer
 

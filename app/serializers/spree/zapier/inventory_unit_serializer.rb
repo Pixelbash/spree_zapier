@@ -1,7 +1,7 @@
 require 'active_model/serializer'
 
 module Spree
-  module Wombat
+  module Zapier
     class InventoryUnitSerializer < ActiveModel::Serializer
       attributes :product_id, :name, :quantity, :price
 
