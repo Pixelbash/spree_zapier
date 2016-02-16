@@ -1,10 +1,10 @@
 # encoding: UTF-8
 Gem::Specification.new do |gem|
-  gem.authors       = ["Peter Berkenbosch"]
-  gem.email         = ["peter@spreecommerce.com"]
+  gem.authors       = ["Joe Swann"]
+  gem.email         = ["joe@pixelbash.co.nz"]
   gem.summary       = "Webhooks and Push API implemention for Zapier"
   gem.description   = gem.summary
-  gem.homepage      = "http://zapier.co"
+  gem.homepage      = "https://github.com/Pixelbash/spree_zapier"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
