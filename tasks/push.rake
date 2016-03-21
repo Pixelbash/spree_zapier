@@ -16,6 +16,22 @@ namespace :zapier do
     end
   end
 
+  desc 'Push single to Zapier'
+  task :push_one => :environment do
+    if Spree::Zapier::Config[:connection_token] == "YOUR TOKEN" || Spree::Zapier::Config[:connection_id] == "YOUR CONNECTION ID"
+      abort("[ERROR] It looks like you did not add your Zapier credentails to config/intializers/zapier.rb, please add them and try again. Exiting now")
+    end
+
+    puts "\n\n"
+    puts "Starting pushing objects to Zapier"
+
+
+    Spree::Zapier::Config[:push_objects].each do |object|
+      objects_pushed_count = Spree::Zapier::Client.push_one(object)
+      puts "Pushed #{objects_pushed_count} #{object} to Zapier"
+    end
+  end
+
   desc 'Set push date to date/time (defaults to now). Usage: rake zapier:last_pushed date=09/02/2016'
   task :last_pushed => :environment do |t, args|
     # Get time, from args if necessary
