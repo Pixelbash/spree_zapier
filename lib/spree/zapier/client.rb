@@ -41,7 +41,7 @@ module Spree
         object_count
       end
 
-      def self.push_one(object, ts_offset = 5)
+      def self.push_one(object, find = false, ts_offset = 5)
         object_count = 0
 
         last_push_time = Spree::Zapier::Config[:last_pushed_timestamps][object] || Time.at(0)
