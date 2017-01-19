@@ -70,6 +70,10 @@ module Spree
           root: payload_builder[:root]
         ).to_json
 
+        puts payload.inspect
+
+        raise
+
         push(payload) unless object_count == 0
 
         # update_last_pushed(object, this_push_time) unless object_count == 0

@@ -4,7 +4,7 @@ module Spree
   module Zapier
     class OrderSerializer < ActiveModel::Serializer
 
-      attributes :id, :status, :channel, :email, :currency, :placed_on, :updated_at, :totals,
+      attributes :id, :env, :status, :channel, :email, :currency, :placed_on, :updated_at, :totals,
         :adjustments, :guest_token, :shipping_instructions
 
       has_many :line_items,  serializer: Spree::Zapier::LineItemSerializer
@@ -16,6 +16,10 @@ module Spree
 
       def id
         object.number
+      end
+
+      def env
+        Rails.env
       end
 
       def shipping_instructions
