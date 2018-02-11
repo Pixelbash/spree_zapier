@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "spree_zapier"
   gem.require_paths = ["lib"]
-  gem.version       = '3.2.0.2'
+  gem.version       = '3.2.0.3'
 
   gem.add_dependency 'spree_core', '~> 3.2.0'
   gem.add_dependency 'active_model_serializers', '0.9.0'

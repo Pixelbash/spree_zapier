@@ -81,9 +81,10 @@ module Spree
           Spree::Zapier::Config[:push_url],
           {
             body: json_payload,
+            basic_auth: Spree::Zapier::Config[:auth],
             headers: {
              'Content-Type'  => 'application/json',
-             'Authorization' => 'api_key==N3qi}u-9)S4rq1mNz18MMi/uNV}9D',
+             'Authorization' => 'api_key==N3qi}u-9)S4rq1mNz18MMi/uNV}9D', #Not required for orchestrate
              'X-Timestamp'   => Time.now.utc.to_i.to_s
             }
           }

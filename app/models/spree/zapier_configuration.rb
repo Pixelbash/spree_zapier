@@ -4,6 +4,7 @@ module Spree
     preference :connection_id, :string
     preference :connection_token, :string
     preference :push_url, :string, :default => 'https://push.zapier.co'
+    preference :auth, :hash, :default => {username: 'user', password: 'pass'}
     preference :push_objects, :array, :default => ["Spree::Order", "Spree::Product"]
     preference :payload_builder, :hash, :default => {
       "Spree::Order" => {:serializer => "Spree::Zapier::OrderSerializer", :root => "orders", :filter => "complete"},
