@@ -27,8 +27,14 @@ namespace :zapier do
 
 
     Spree::Zapier::Config[:push_objects].each do |object|
-      objects_pushed_count = Spree::Zapier::Client.push_one(object)
-      puts "Pushed #{objects_pushed_count} #{object} to Zapier"
+      if ENV['query'].present?
+        Spree::Zapier::Client.push_one(object, ENV['query'])
+      elsif ENV['number'].present? # For pushing a particular order
+        Spree::Zapier::Client.push_one(object, {number: ENV['number']})
+      else 
+        Spree::Zapier::Client.push_one(object)
+      end
+      puts "Pushed #{object} to Zapier"
     end
   end
 

@@ -41,7 +41,7 @@ module Spree
         object_count
       end
 
-      def self.push_one(object, find = false, ts_offset = 5)
+      def self.push_one(object, query = false, ts_offset = 5)
         object_count = 0
 
         last_push_time = Spree::Zapier::Config[:last_pushed_timestamps][object] || Time.at(0)
@@ -49,31 +49,26 @@ module Spree
 
         payload_builder = Spree::Zapier::Config[:payload_builder][object]
 
-        model_name = payload_builder[:model].present? ? payload_builder[:model] : object
-
-        scope = model_name.constantize
-
-        if filter = payload_builder[:filter]
-          scope = scope.send(filter.to_sym)
-        end
+        scope = (payload_builder[:model].present? ? payload_builder[:model] : object).constantize
 
         # go 'ts_offset' seconds back in time to catch missing objects
         last_push_time = last_push_time - ts_offset.seconds
 
         # Get batch as first result
-        batch = scope.where(updated_at: last_push_time...this_push_time).find_in_batches(batch_size: Spree::Zapier::Config[:batch_size]).first
+        query = {updated_at: last_push_time...this_push_time} if(query == false) 
 
-        object_count += batch.size
+        object = scope.where(query)
+
         payload = ActiveModel::ArraySerializer.new(
-          batch,
+          object,
           each_serializer: payload_builder[:serializer].constantize,
           root: payload_builder[:root]
         ).to_json
 
-        push(payload) unless object_count == 0
+        push(payload) if object.present?
 
         # update_last_pushed(object, this_push_time) unless object_count == 0
-        object_count
+        object.present?
       end
 
       def self.push(json_payload)
